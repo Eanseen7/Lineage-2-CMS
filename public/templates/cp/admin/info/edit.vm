@@ -1,0 +1,57 @@
+<div class="uk-grid">
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+            <form class="uk-form" action="#springUrl("/admin/info/edit")" method="POST"
+                  enctype="multipart/form-data">
+				#springFormHiddenInput("info.id")
+
+                <div>
+                    Название
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("info.title" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Содержание
+                </div>
+                <div class="uk-form-row">
+					#springFormTextarea("info.content" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Ссылка на форум
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("info.link" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div class="uk-form-row">
+                    <input type="file" name="file">
+                </div>
+                <br>
+
+                <div class="uk-form-row">
+                    <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">Сохранить
+                        новость
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+            <img src="/image/info/$info.id" alt="" class="nimg" width="168" height="128"/>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script>
+<script type="text/javascript">
+    bkLib.onDomLoaded(function() {
+        new nicEditor({fullPanel : true}).panelInstance('content');
+    });
+</script>

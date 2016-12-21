@@ -1,0 +1,7 @@
+<div class="uk-grid">
+    <div class="uk-width-10-10">
+        <div class="uk-panel-box">
+            <a href="/admin/manager/item" class="uk-button uk-button-success">Предметы</a>
+        </div>
+    </div>
+</div>

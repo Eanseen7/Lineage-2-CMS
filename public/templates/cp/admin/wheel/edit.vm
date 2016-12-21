@@ -1,0 +1,64 @@
+<div class="uk-grid">
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+            <form class="uk-form" action="#springUrl("/admin/wheel/edit")" method="POST"
+                  enctype="multipart/form-data">
+				<input name="id" type="hidden" value="$!wheel.id">
+
+                <div>
+                    Id предмета
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("wheel.itemId" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Кол-во предмета
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("wheel.itemCount" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Шанс предмета
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("wheel.chance" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div class="uk-form-row">
+                    Картинка: <input type="file" name="file">
+                </div>
+                <br>
+
+                <div class="uk-form-row">
+                    <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">Сохранить
+                    </button>
+                </div>
+            </form>
+        </div>
+		<br>
+        <div class="uk-width-5-10">
+            <div class="uk-panel-box">
+                <img src="/image/wheel/$wheel.id" alt="" class="nimg"/>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+			#foreach($wheelOne in $wheelList)
+                <p>
+                    <a href="/admin/wheel/remove/$wheelOne.id" class="uk-button uk-button-danger">Удалить</a>
+                    <a href="/admin/wheel/edit/$wheelOne.id" class="uk-button uk-button-success">Редактировать</a>
+                    <img src="/image/wheel/$wheelOne.id" width="32" height="32"/>
+					$itemNames.getItemName($wheelOne.itemId) -
+					$wheelOne.itemCount шт -
+					$wheelOne.chance %
+                </p>
+			#end
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<div id="general-wrapper">
+    <div id="bg1"></div>
+    <div id="bg2"></div>
+    <div id="bg3"></div>
+    <div id="bg4"></div>
+    <div id="bg5"></div>
+    <div class="inner-wrapper">
+        <header id="header-wrapper">
+            <ul class="nav">
+                <li><a href="/">Главная</a></li>
+                <li><a href="/enter">Регистрация</a></li>
+                <li><a href="http://forum.l2joy.ru/topic/4-%D1%84%D0%B0%D0%B9%D0%BB%D1%8B/">Скачать файлы</a></li>
+                <li><a href="http://forum.l2joy.ru/topic/2-%D0%BE-%D1%81%D0%B5%D1%80%D0%B2%D0%B5%D1%80%D0%B5/">О сервере</a></li>
+                <li><a href="/cp">Пожертвования</a></li>
+                <li><a href="/cp">Личный кабинет</a></li>
+                <li><a href="http://forum.l2joy.ru">Форум</a></li>
+            </ul>
+
+            <a href="http://forum.l2joy.ru/topic/3-%D0%BA%D0%B0%D0%BA-%D0%BD%D0%B0%D1%87%D0%B0%D1%82%D1%8C/" class="start-game"><span>Начать играть</span></a>
+
+            <div id="status">
+                <script type="text/javascript">
+                    $(document).ready(function (e) {
+                        var rand = function (min, max) {
+                            return Math.floor(arguments.length > 1 ? (max - min + 1) * Math.random() + min : (min + 1) * Math.random());
+                        };
+                        $('.load .line').width(0);
+                        $('#status .item').each(function (i, el) {
+                            var serv = $(el);
+                            var online = $(el).find('.sonline span').html();
+                            $(el).find('.line').animate({width: online / 1000 * 243}, 1000);
+                        });
+                    });
+                </script>
+                <div class="item">
+                    <div class="full-name">x100</div>
+                    <div class="sonline"><span>0</span></div>
+                    <div class="load">
+                        <div class="fixed-width">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section id="section-wrapper">
+            <div id="inner-section">
+                #parse("$!page")
+            </div>
+        </section>
+
+        <div id="all-server">
+            <div id="tab-server1" class="tab_content-server">
+                <div id="top-player">
+                    <div id="tab1" class="tab_content">
+                        <div class="top-items" style="margin-bottom: 5px;">
+                            <div class="top-name">Игрок</div>
+                            <div class="top-stat"></div>
+                        </div>
+##                        <div class="top-item">
+##                            <div class="top-name">{n}. {char_name}</div>
+##                            <div class="top-stat">{pvp}</div>
+##                        </div>
+##                        <div class="top-item">
+##                            <div class="top-name">{n}. {char_name}</div>
+##                            <div class="top-stat">{pvp}</div>
+##                        </div>
+##                        <div class="top-item">
+##                            <div class="top-name">{n}. {char_name}</div>
+##                            <div class="top-stat">{pvp}</div>
+##                        </div>
+                    </div>
+                    <div id="tab2" class="tab_content">
+                        <div class="top-items" style="margin-bottom: 5px;">
+                            <div class="top-name">Игрок</div>
+                            <div class="top-stat"></div>
+                        </div>
+##                        <div class="top-item">
+##                            <div class="top-name">{n}. {char_name}</div>																																																																																							<div style="display:none;"><a href="http://thanatos.su/">Шаблоны DLE для Lineage 2, Файлы для Lineage 2, Игровой портал</a></div>
+##                            <div class="top-stat">{pk}</div>
+##                        </div>
+##                        <div class="top-item">
+##                            <div class="top-name">{n}. {char_name}</div>																																																																																							<div style="display:none;"><a href="http://thanatos.su/">Шаблоны DLE для Lineage 2, Файлы для Lineage 2, Игровой портал</a></div>
+##                            <div class="top-stat">{pk}</div>
+##                        </div>
+##                        <div class="top-item">
+##                            <div class="top-name">{n}. {char_name}</div>																																																																																							<div style="display:none;"><a href="http://thanatos.su/">Шаблоны DLE для Lineage 2, Файлы для Lineage 2, Игровой портал</a></div>
+##                            <div class="top-stat">{pk}</div>
+##                        </div>
+                    </div>
+                    <ul class="tabs">
+                        <li><a href="#tab1">PvP</a></li>
+                        <li><a href="#tab2">PK</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="lastpost">
+            #foreach($theme in $forumThemes)
+                #if($forumType == "ipb4")
+                    <div class="last-item">
+                        <div class="lastarrow"></div>
+                        <div class="lastlink"><a href="$forumLink/topic/$theme.getTopicId()-$theme.titleFull/" target="_blank">$theme.title</a></div>
+                        <div class="lastdate">Автор: $theme.name &nbsp;&nbsp; Дата: $theme.date</div>																																																																																							<div style="display:none;"><a href="http://thanatos.su/">Шаблоны DLE для Lineage 2, Файлы для Lineage 2, Игровой портал</a></div>
+                    </div>
+                #end
+            #end
+        </div>
+
+        <div class="vk-block">
+            <script type="text/javascript" src="//vk.com/js/api/openapi.js?136"></script>
+
+            <!-- VK Widget -->
+            <div id="vk_groups"></div>
+            <script type="text/javascript">
+                VK.Widgets.Group("vk_groups", {mode: 1, width: "300", height: "200", color1: '2C455C', color2: 'FFFFFF', color3: 'A5C0C9'}, 134883585);
+            </script>
+        </div>
+
+        <footer id="footer-wrapper">
+            <div class="footer-banner"><span>Способы оплаты:</span></div>
+            <div class="copy-block">
+                L2Joy.ru
+                <span>© 2016 L2Joy.ru - Lineage II Classic</span>
+        </footer>
+    </div>
+</div>

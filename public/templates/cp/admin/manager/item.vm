@@ -1,0 +1,49 @@
+<div class="uk-grid">
+    <div class="uk-width-5-10">
+        <form class="uk-panel uk-panel-box uk-form" id="form">
+            <div class="uk-form-row">
+                <input class="uk-width-1-1 uk-form-large" type="text" placeholder="MAccountId" name="mAccountId" id="mAccountId"/>
+            </div>
+            <div class="uk-form-row">
+                <input class="uk-width-1-1 uk-form-large" type="text" placeholder="ItemId" name="itemId" id="itemId"/>
+            </div>
+            <div class="uk-form-row">
+                <input class="uk-width-1-1 uk-form-large" type="text" placeholder="ItemCount" name="itemCount" id="itemCount"/>
+            </div>
+            <div class="uk-form-row">
+                <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">Отправить</button>
+            </div>
+			#if($!error)
+                <div class="uk-alert uk-alert-danger"><a href="/manager/item" class="uk-alert-close uk-close"></a>$error
+                </div>
+			#end
+        </form>
+        <div id="div1"></div>
+        <script type="text/javascript">
+            $('#form').submit(function () {
+                var uri = '/admin/manager/addItem';
+                var data = $("#form").serialize();
+                $.ajax({
+                    url: uri,
+                    data: data,
+                    type: "POST"
+                })
+                        .done(function (data) {
+                            $('#mAccountId').val("");
+                            $('#itemId').val("");
+                            $('#itemCount').val("");
+                            switch (data.type) {
+                                case 'SUCCESS':
+                                    $('#div1').html('<div class="uk-alert uk-alert-success"><a href="/admin/manager/item" class="uk-alert-close uk-close"></a>' + data.message + '</div>');
+                                    break;
+                                case 'FAIL':
+                                    $('#div1').html('<div class="uk-alert uk-alert-danger"><a href="/admin/manager/item" class="uk-alert-close uk-close"></a>' + data.message + '</div>');
+                                    break;
+                            }
+                        });
+                return false;
+            });
+
+        </script>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<nav class="uk-navbar uk-margin-small-bottom">
+    <ul class="uk-navbar-nav uk-hidden-small">
+        <li>
+            <a href="/">Сайт</a>
+        </li>
+        <li>
+            <a href="/enter">Личный кабинет</a>
+        </li>
+		#if($!mAccount.id)
+            <li>
+                <a href="/shop">Магазин</a>
+            </li>
+			#if($!luckyWheel)
+                <li>
+                    <a href="/wheel">Колесо Удачи</a>
+                </li>
+			#end
+			#if($!mAccount.admin)
+                <li>
+                    <a href="/admin">Админка</a>
+                </li>
+			#end
+            <li>
+                <a href="/cp/exit">Выход</a>
+            </li>
+		#end
+    </ul>
+</nav>

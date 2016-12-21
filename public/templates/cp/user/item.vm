@@ -1,0 +1,229 @@
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="uk-panel-box">
+            <a href="/cp" class="uk-button uk-button-success">Назад</a>
+        </div>
+    </div>
+</div>
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="uk-panel-box">
+            <select name="loginServerId" class="uk-form-large" onchange="setLoginServer();" id="selectLoginServer">
+                <option disabled selected>Выберите сервер</option>
+				#foreach($loginServer in $loginServers)
+                    <option value="$loginServer.id">$loginServer.name</option>
+				#end
+            </select>
+            <select name="gameServerId" class="uk-form-large" onchange="setGameServer();" id="selectGameServer">
+                <option disabled selected>Выберите игровой сервер</option>
+            </select>
+            <select name="account" class="uk-form-large" onchange="setAccount();" id="selectAccount">
+                <option disabled selected>Выберите аккаунт</option>
+            </select>
+            <select name="player" class="uk-form-large" id="selectPlayer">
+                <option disabled selected>Выберите персонажа</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+##        <div class="uk-panel-box">
+            <div id="div"></div>
+##        </div>
+    </div>
+</div>
+
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="uk-panel-box">
+            <table class="uk-table uk-table-hover">
+                <thead>
+                <tr>
+                    <th>Предмет</th>
+                    <th>Кол-во</th>
+                    <th>Перевод предметов в игру</th>
+                </tr>
+                </thead>
+                <tbody>
+					#set( $i = 0)
+					#foreach($item in $items)
+					#set( $i = $i + 1 )
+                    <tr>
+                        <td class="uk-text-middle" width="30%">
+                            <a class="uk-text-primary" id="itemId$i">$itemNames.getItemName($item.itemId)</a>
+                        </td>
+                        <td class="uk-text-middle">
+                            <a class="uk-text-success" id="allItem$i">$item.itemCount</a>
+                        </td>
+                        <form class="uk-panel uk-panel-box uk-form" id="form$i">
+                            <td>
+                                <input type="hidden" name="itemId" value="$item.itemId">
+                                <input class="uk-form-large" type="number" placeholder="Кол-во" name="itemCount" id="sendItem$i"/>
+                                <button class="uk-button uk-button-primary uk-button-large" type="submit">
+                                    Перевести
+                                </button>
+                            </td>
+                        </form>
+                    </tr>
+                    <script>
+                        $('#form$i').submit(function () {
+                            var loginServerId = document.getElementById('selectLoginServer').value;
+                            var gameServerId = document.getElementById('selectGameServer').value;
+                            var account = document.getElementById('selectAccount').value;
+                            var playerName = document.getElementById('selectPlayer').value;
+
+							var itemName = document.getElementById('itemId$i').innerText;
+                            var uri = '/XmlRpcGame/addItemByPlayerName';
+                            var data = "loginServerId=" + loginServerId + "&gameServerId=" + gameServerId + "&account=" + account + "&playerName=" + playerName + "&" + $(this).serialize();
+
+                            $.ajax({
+                                url: uri,
+                                data: data,
+                                type: "POST"
+                            })
+                                    .done(function (data) {
+                                        switch (data.type) {
+                                            case 'SUCCESS':
+                                                var allItem = parseInt(document.getElementById('allItem$i').innerText);
+                                                var sendItem = parseInt(document.getElementById('sendItem$i').value);
+                                                $('#div').html('<div class="uk-alert uk-alert-success"></a>Персонажу <strong>' + playerName + '</strong> выдано <strong>' + itemName + ' ' + sendItem + 'шт.</strong></div>');
+                                                document.getElementById('allItem$i').innerText = allItem - sendItem;
+                                                break;
+                                            case 'FAIL':
+                                                $('#div').html('<div class="uk-alert uk-alert-danger"><a href="#" class="uk-alert-close uk-close"></a>' + data.message + '</div>');
+                                                break;
+                                        }
+                                    });
+                            return false;
+                        });
+                    </script>
+					#end
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setLoginServer() {
+        var val = document.getElementById('selectLoginServer').value;
+        var uri = '/cp/item/getGameServersByLoginServerId/' + val;
+        $.ajax({
+            url: uri,
+            type: "GET"
+        })
+                .done(function (data) {
+                    var parent = document.getElementById('selectGameServer');
+                    parent.innerHTML = '';
+                    var child = document.createElement('option');
+                    input = parent.appendChild(child);
+                    input.setAttribute("disabled", "");
+                    input.setAttribute("selected", "");
+                    input.innerHTML = "Выберите игровой сервер";
+
+                    var gameServers = JSON.parse(data);
+                    for (var key in gameServers) {
+                        child = document.createElement('option');
+                        input = parent.appendChild(child);
+                        input.setAttribute('value', key);
+                        input.innerHTML = gameServers[key];
+                    }
+
+                    parent = document.getElementById('selectAccount');
+                    parent.innerHTML = '';
+                    child = document.createElement('option');
+                    input = parent.appendChild(child);
+                    input.setAttribute("disabled", "");
+                    input.setAttribute("selected", "");
+                    input.innerHTML = "Выберите аккаунт";
+
+                    parent = document.getElementById('selectPlayer');
+                    parent.innerHTML = '';
+                    child = document.createElement('option');
+                    input = parent.appendChild(child);
+                    input.setAttribute("disabled", "");
+                    input.setAttribute("selected", "");
+                    input.innerHTML = "Выберите персонажа";
+                });
+        return false;
+    }
+
+    function setGameServer() {
+        var val = document.getElementById('selectLoginServer').value;
+        var uri = '/cp/item/getAccountsByLoginServerId/' + val;
+        $.ajax({
+            url: uri,
+            type: "GET"
+        })
+                .done(function (data) {
+                    var parent = document.getElementById('selectAccount');
+                    parent.innerHTML = '';
+                    var child = document.createElement('option');
+                    input = parent.appendChild(child);
+                    input.setAttribute("disabled", "");
+                    input.setAttribute("selected", "");
+                    input.innerHTML = "Выберите аккаунт";
+
+                    var gAccounts = JSON.parse(data);
+                    for (var i = 0; i < gAccounts.length; i++) {
+                        child = document.createElement('option');
+                        input = parent.appendChild(child);
+                        input.setAttribute('value', gAccounts[i]);
+                        input.innerHTML = gAccounts[i];
+                    }
+
+                    parent = document.getElementById('selectPlayer');
+                    parent.innerHTML = '';
+                    child = document.createElement('option');
+                    input = parent.appendChild(child);
+                    input.setAttribute("disabled", "");
+                    input.setAttribute("selected", "");
+                    input.innerHTML = "Выберите персонажа";
+                });
+        return false;
+    }
+
+    function setAccount(i) {
+        var loginServerId = document.getElementById('selectLoginServer').value;
+        var gameServerId = document.getElementById('selectGameServer').value;
+        var account = document.getElementById('selectAccount').value;
+        var uri = '/XmlRpcGame/getPlayersNameByAccount';
+        var data = "loginServerId=" + loginServerId + "&gameServerId=" + gameServerId + "&account=" + account;
+        $.ajax({
+            url: uri,
+			data: data,
+            type: "GET"
+        })
+                .done(function (data) {
+                    var parent = document.getElementById('selectPlayer');
+                    parent.innerHTML = '';
+                    child = document.createElement('option');
+                    input = parent.appendChild(child);
+                    input.setAttribute("disabled", "");
+                    input.setAttribute("selected", "");
+                    input.innerHTML = "Выберите персонажа";
+
+                    var players = JSON.parse(data);
+
+                    if (players.length != 0) {
+                        for (var i = 0; i < players.length; i++) {
+                            var child = document.createElement('option');
+                            input = parent.appendChild(child);
+                            input.setAttribute('value', players[i]);
+                            input.innerHTML = players[i];
+                        }
+                    }
+                    else {
+                        parent.innerHTML = '';
+                        child = document.createElement('option');
+                        input = parent.appendChild(child);
+                        input.setAttribute("disabled", "");
+                        input.setAttribute("selected", "");
+                        input.innerHTML = "Нет персонажей";
+                    }
+                });
+        return false;
+    }
+</script>

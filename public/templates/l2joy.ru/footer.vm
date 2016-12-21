@@ -1,0 +1,32 @@
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?136"></script>
+
+<!-- VK Widget -->
+<div id="vk_community_messages"></div>
+<script type="text/javascript">
+    VK.Widgets.CommunityMessages("vk_community_messages", 134883585, {});
+</script>
+
+<a target="_blank"
+ href="http://new-lineage.ru"><img src="http://new-lineage.ru/IMG/L2.gif"
+ title="Новые сервера Lineage 2"></a>
+
+<a href="https://pickns.ru/" target="_blank"><img src="https://pickns.ru/images/pickns.png" title="Новые сервера Lineage 2 Interlude, Gracia Final, Epilogue, Freya, High Five, GOD" width=150 height=53 border=0></a>
+
+<!-- Yandex.Metrika counter --> <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter41547659 = new Ya.Metrika({ id:41547659, clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/41547659" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+<div style='display:inline-block; position:fixed; bottom:0; right:0;'><a href="https://la2.mmotop.ru/servers/27012" target="_blank">
+  <img src="http://img.mmotop.ru/mmo_27012.png" border="0" id="mmotopratingimg" alt="Рейтинг серверов mmotop">
+</a></div>
+<script type="text/javascript">document.write("<script src='http://js.mmotop.ru/rating_code.js?" + Math.round((((new Date()).getUTCDate() + (new Date()).getMonth() * 30) / 7)) + "_" + (new Date()).getFullYear() + "' type='text/javascript'><\/script>");</script>
+
+
+<a style="position: fixed; z-index:99999; top: 0; left: 0; " target="_blank" href="http://la2top.net/"><img alt="Новые сервера Lineage 2, L2TOP сервера, Анонсы серверов Lineage 2" border="0" title="Новые сервера Lineage 2, L2TOP сервера, Анонсы серверов Lineage 2" src="http://la2top.net/top.png" width="186" height="59" border="0" /></a>
+
+<a style="position: fixed; z-index:99999; top: 0; right: 0;" target="_blank" href="http://global-anons.com/"><img border="0" title="Анонсы серверов Lineage 2 Interlude, Gracia Final, Epilogue, Freya, High Five, Goddess of Destruction" src="http://global-anons.com/img/tright.png" width="145" height="122" border="0" /></a>
+
+<a href="http://la2add.ru/" target="_blank"><img src="http://la2add.ru/la2add.gif" alt="la2add.ru: Анонсы Cерверов Lineage2" /></a>
+
+<a href="http://l2ok.net/" target="_blank"><img title="Новые сервера Lineage 2, список серверов, Анонсы л2" src="http://l2ok.net/ok.gif" alt="Новые сервера Lineage 2, список серверов, Анонсы л2" /></a>
+
+</body>
+</html>

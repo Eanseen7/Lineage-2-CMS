@@ -1,0 +1,743 @@
+<script type="text/javascript" src="/static/cp/js/jquery.slimscroll.min.js"></script>
+<script type="text/javascript" src="/static/cp/js/jquery.jscrollpane.min.js"></script>
+
+<style>
+    #lucky-wheel {
+        float: left;
+    }
+
+    #lucky-wheel, .wheel-border, .wheel-main, .wheel-load, .wheel-popup {
+        width: 640px;
+        height: 832px;
+        overflow: hidden;
+        color: #FFF;
+    }
+
+    .wheel-load {
+        position: absolute;
+        background: #000;
+        z-index: 20;
+    }
+
+    .wheel-bg {
+        width: 640px;
+        height: 278px;
+        position: absolute;
+        background: url(/static/cp/images/wheel/background.png);
+        z-index: 1;
+    }
+
+    .wheel-border {
+        position: absolute;
+        background: url(/static/cp/images/wheel/border.png);
+        z-index: 3;
+    }
+
+    .wheel-main {
+        position: absolute;
+        background: url(/static/cp/images/wheel/cover.png);
+        z-index: 2;
+    }
+
+    .wheel-gear {
+        width: 1015px;
+        height: 1015px;
+        position: relative;
+        left: -185px;
+        top: 110px;
+        background: url(/static/cp/images/wheel/gear.png);
+        z-index: 1;
+    }
+
+    .gospin {
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 1000ms;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-name: spin;
+        -moz-animation-duration: 1000ms;
+        -moz-animation-timing-function: linear;
+        -moz-animation-iteration-count: infinite;
+        -o-animation-name: spin;
+        -o-animation-duration: 1000ms;
+        -o-animation-timing-function: linear;
+        -o-animation-iteration-count: infinite;
+        animation-name: spin;
+        animation-duration: 1000ms;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    .gospin2 {
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 4s;
+        -webkit-animation-timing-function: ease-out;
+        -webkit-animation-iteration-count: 1;
+        -moz-animation-name: spin;
+        -moz-animation-duration: 4s;
+        -moz-animation-timing-function: ease-out;
+        -moz-animation-iteration-count: 1;
+        -o-animation-name: spin;
+        -o-animation-duration: 4s;
+        -o-animation-timing-function: ease-out;
+        -o-animation-iteration-count: 1;
+        animation-name: spin;
+        animation-duration: 4s;
+        animation-timing-function: ease-out;
+        animation-iteration-count: 1;
+    }
+
+    .gospin3 {
+        -webkit-animation-name: spin;
+        -webkit-animation-duration: 60s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-name: spin;
+        -moz-animation-duration: 60s;
+        -moz-animation-timing-function: linear;
+        -moz-animation-iteration-count: infinite;
+        -o-animation-name: spin;
+        -o-animation-duration: 60s;
+        -o-animation-timing-function: linear;
+        -o-animation-iteration-count: infinite;
+        animation-name: spin;
+        animation-duration: 60s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    .gear-item {
+        width: 140px;
+        height: 225px;
+        position: absolute;
+    }
+
+    .gear-item1 {
+        left: 436px;
+        top: 100px;
+    }
+
+    .gear-item2 {
+        left: 593px;
+        top: 144px;
+        -webkit-transform: rotate(36deg);
+        -moz-transform: rotate(36deg);
+        transform: rotate(36deg);
+    }
+
+    .gear-item3 {
+        left: 691px;
+        top: 245px;
+        -webkit-transform: rotate(60deg);
+        -moz-transform: rotate(60deg);
+        transform: rotate(60deg);
+    }
+
+    .gear-item4 {
+        left: 735px;
+        top: 387px;
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+
+    .gear-item5 {
+        left: 700px;
+        top: 530px;
+        -webkit-transform: rotate(120deg);
+        -moz-transform: rotate(120deg);
+        transform: rotate(120deg);
+    }
+
+    .gear-item6 {
+        left: 602px;
+        top: 639px;
+        -webkit-transform: rotate(145deg);
+        -moz-transform: rotate(145deg);
+        transform: rotate(145deg);
+    }
+
+    .gear-item7 {
+        left: 436px;
+        top: 691px;
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+
+    .gear-item8 {
+        left: 260px;
+        top: 634px;
+        -webkit-transform: rotate(215deg);
+        -moz-transform: rotate(215deg);
+        transform: rotate(215deg);
+    }
+
+    .gear-item9 {
+        left: 169px;
+        top: 523px;
+        -webkit-transform: rotate(245deg);
+        -moz-transform: rotate(245deg);
+        transform: rotate(245deg);
+    }
+
+    .gear-item10 {
+        left: 142px;
+        top: 375px;
+        -webkit-transform: rotate(270deg);
+        -moz-transform: rotate(270deg);
+        transform: rotate(270deg);
+    }
+
+    .gear-item11 {
+        left: 182px;
+        top: 245px;
+        -webkit-transform: rotate(300deg);
+        -moz-transform: rotate(300deg);
+        transform: rotate(300deg);
+    }
+
+    .gear-item12 {
+        left: 290px;
+        top: 139px;
+        -webkit-transform: rotate(330deg);
+        -moz-transform: rotate(330deg);
+        transform: rotate(330deg);
+    }
+
+    .gear-item13 {
+        display: none;
+    }
+
+    .gear-item14 {
+        display: none;
+    }
+
+    .gear-item15 {
+        display: none;
+    }
+
+    .gear-item16 {
+        display: none;
+    }
+
+    .gear-item17 {
+        display: none;
+    }
+
+    .gear-item18 {
+        display: none;
+    }
+
+    .gear-item19 {
+        display: none;
+    }
+
+    .gear-item20 {
+        display: none;
+    }
+
+    .gear-item21 {
+        display: none;
+    }
+
+    .gear-item22 {
+        display: none;
+    }
+
+    .wheel-prize-name {
+        width: 140px;
+        margin-top: 20px;
+        position: absolute;
+        text-align: center;
+        color: #dc7c00;
+    }
+
+    .wheel-prize {
+        width: 140px;
+        margin-top: 92px;
+        position: absolute;
+        text-align: center;
+    }
+
+    .wheel-prize img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .wheel-glow-effect {
+        width: 170px;
+        height: 170px;
+        position: absolute;
+        background: url(/static/cp/images/wheel/Win_Effect.png);
+        background-size: contain;
+        margin: 55px 0 0 -10px;
+        opacity: 0.3;
+    }
+
+    .wheel-buttonoff {
+        position: absolute;
+        width: 259px;
+        height: 259px;
+        border-radius: 50%;
+        margin: 486px 0 0 191px;
+        background: url(/static/cp/images/wheel/buttons.png) 0 -777px;
+        z-index: 5;
+    }
+
+    .wheel-button {
+        position: absolute;
+        width: 259px;
+        height: 259px;
+        border-radius: 50%;
+        margin: 486px 0 0 191px;
+        background: url(/static/cp/images/wheel/buttons.png);
+        cursor: pointer;
+        z-index: 4;
+    }
+
+    .wheel-button:hover {
+        background-position: 0 -259px;
+    }
+
+    .wheel-button:active {
+        background-position: 0 -518px;
+    }
+
+    #lucky-wheel #char_name {
+
+        z-index: 5;
+        background-color: #3e2311;
+        border: 1px solid #9d8c82;
+        border-radius: 2px;
+        color: #DDD;
+        padding: 4px 5px 5px 5px;
+        font: 14px/18px 'Open Sans', sans-serif;
+        box-shadow: 0 0 5px 2px rgba(0, 0, 0, .2) inset;
+        -webkit-box-shadow: 0 0 5px 2px rgba(0, 0, 0, .2) inset;
+        outline: none;
+    }
+
+    #lucky-wheel .wheel-popup {
+        position: absolute;
+        z-index: 10;
+        background: url(/static/cp/images/wheel/Popup_bg.png) no-repeat center;
+        background-color: rgba(0, 0, 0, .8);
+    }
+
+    #lucky-wheel .wheel-popup .start-popup {
+        width: 508px;
+        height: 661px;
+        position: absolute;
+        padding: 30px;
+        margin: 80px 0 0 70px;
+        color: #FFF;
+        z-index: 10;
+    }
+
+    #lucky-wheel .win-popup {
+        width: 485px;
+        margin: 100px 0 0 75px;
+    }
+
+    #lucky-wheel .win-popup .win-img {
+        text-align: center;
+    }
+
+    #lucky-wheel .win-popup .win-item-img {
+        text-align: center;
+    }
+
+    #lucky-wheel .win-popup .win-item-img img {
+        width: 150px;
+        height: 150px;
+    }
+
+    #lucky-wheel .win-popup .win-item-name {
+        text-align: center;
+        margin-top: 5px;
+        background: url(/static/cp/images/wheel/Itemname_bg.png) no-repeat;
+        width: 485px;
+        height: 67px;
+        color: #33d9f1;
+        font: 24px/64px 'Open Sans', sans-serif;
+        text-shadow: 2px 2px 3px #000;
+    }
+
+    #lucky-wheel .start-popup .wheel-info {
+        width: 430px;
+    }
+
+    #lucky-wheel .start-popup .wheel-info ul {
+        padding: 10px;
+    }
+
+    #lucky-wheel .start-popup .wheel-title {
+        width: 430px;
+        text-align: center;
+        font-size: 24px;
+        padding-bottom: 20px;
+    }
+
+    #lucky-wheel .wheel-popup .wheel-start-btn {
+        width: 200px;
+        text-align: center;
+        padding: 10px;
+        background: url(/static/cp/images/wheel/button_bg.png) no-repeat;
+        border: 2px solid #9d8c82;
+        outline: none;
+        color: #FFF;
+        font: 18px/18px 'Open Sans', sans-serif;
+        cursor: pointer;
+    }
+
+    #lucky-wheel .wheel-popup .wheel-start-btn:hover {
+        box-shadow: inset 0 0 6px 3px #111;
+    }
+
+    #lucky-wheel .wheel-popup .wheel-start-btn:active {
+        box-shadow: inset 0 0 16px 6px #111;
+    }
+
+    #lucky-wheel .start-popup .wheel-btn {
+        width: 440px;
+        text-align: center;
+    }
+
+    #lucky-wheel .win-popup .wheel-btn {
+        width: 485px;
+        text-align: center;
+        padding-top: 155px;
+    }
+
+    #lucky-wheel .wheel-count {
+        position: absolute;
+        text-align: center;
+        margin: 770px 0 0 20px;
+        z-index: 10;
+        font-size: 16px;
+    }
+
+    @keyframes spin {
+        from {
+            -webkit-transform: rotate(0deg);
+            -moz-transform: rotate(0deg);
+            transform: rotate(0deg);
+        }
+        to {
+            -webkit-transform: rotate(360deg);
+            -moz-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    .wheel-loading-gears {
+        width: 101px;
+        height: 101px;
+        margin: 310px 0 0 270px;
+        background: url(/static/cp/images/wheel/gears.gif) no-repeat;
+    }
+
+    .wheel-loading {
+        width: 188px;
+        height: 63px;
+        margin: 10px 0 0 223px;
+        background: url(/static/cp/images/wheel/loading.png) no-repeat;
+    }
+
+    #prize-block {
+        width: 180px;
+        height: 832px;
+        background: #0f0000;
+        float: left;
+        overflow: auto;
+    }
+
+    #prize-block .prize-item {
+        padding: 3px 0 3px 0;
+        border-bottom: 1px solid #655757;
+        border-top: 1px solid #562626;
+    }
+
+    .prize-item_name {
+        text-align: center;
+        width: 150px;
+        padding-bottom: 5px;
+        color: #FFF;
+        font-size: 16px;
+        text-shadow: 2px 2px 3px #000;
+    }
+
+    .prize-item_img {
+        width: 150px;
+        text-align: center;
+        padding-top: 5px;
+    }
+
+    .prize-item_img img {
+        width: 32px;
+        height: 32px;
+    }
+
+    #wheel-faq {
+        float: left;
+        width: 600px;
+        margin-left: 50px;
+    }
+
+    #wheel-faq .faq-title {
+        text-align: center;
+        font-size: 18px;
+        padding-bottom: 15px;
+        color: #FFF;
+    }
+</style>
+
+<div class="uk-grid">
+    <div class="uk-width-3-4">
+        <div class="body">
+            <div class="block">
+                <div class="block-info">
+                    <div id="lucky-wheel">
+                        <div class="wheel-popup" style="display: none;">
+                            <div class="win-popup" hidden>
+                                <div class="win-img"><img src="/static/cp/images/wheel/win.png" alt=""></div>
+                                <div class="win-item-img"></div>
+                                <div class="win-item-name">Item name</div>
+                                <div class="wheel-btn">
+                                    <button class="wheel-start-btn" onclick="ContinueGame()">Играть еще</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="wheel-count"></div>
+                        <div class="wheel-buttonoff" hidden></div>
+                        <div class="wheel-button" onclick="spin()"></div>
+                        <div class="wheel-main"></div>
+                        <div class="wheel-border"></div>
+                        <div class="wheel-bg"></div>
+                        <div class="wheel-gear gospin3">
+                            #set( $i = 1 )
+                            #foreach($wheelOne in $wheelList)
+                                <div class="gear-item gear-item$i">
+                                    <div class="wheel-prize-name">$itemNames.getItemName($wheelOne.itemId)
+                                        x$wheelOne.itemCount</div>
+                                    <div class="wheel-prize"><img src="/image/wheel/$wheelOne.id" alt=""></div>
+                                </div>
+                                #set( $i = $i + 1 )
+                            #end
+                        </div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div id="prize-block">
+                        <div id="feed" class="feed">
+                            #foreach($wheelOne in $wheelList)
+                                <div class="prize-item">
+                                    <div class="prize-item_img"><img src="/image/wheel/$wheelOne.id" alt=""></div>
+                                    <div class="prize-item_name">$itemNames.getItemName($wheelOne.itemId)
+                                        x$wheelOne.itemCount</div>
+                                </div>
+                            #end
+                        </div>
+                    </div>
+                    <div id="wheel-faq">
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-1-4">
+        <div class="uk-panel-box">
+            <div class="uk-form-row">
+                <strong>Рубли:</strong>
+                <label class="uk-width-1-1 uk-button uk-button-primary uk-button-large"
+                       id="wheelTicketCount">$!itemService.getCount($!mAccount.id, 100000)</label>
+                <br>
+                <br>
+                <strong>Голоса:</strong>
+                <label class="uk-width-1-1 uk-button uk-button-primary uk-button-large"
+                       id="wheelTicketCount">$!itemService.getCount($!mAccount.id, 100001)</label>
+                <br>
+                <br>
+                <strong>Количество билетов:</strong>
+                <label class="uk-width-1-1 uk-button uk-button-primary uk-button-large"
+                       id="wheelTicketCount">$!mAccount.wheelTicket</label>
+            </div>
+            <div class="uk-form-row">
+                <strong>Купить билет за:</strong>
+            </div>
+            <div class="uk-form-row">
+                #foreach($price in $prices)
+                    <a href="/wheel/getTicket/$price.itemId"
+                       class="uk-width-1-1 uk-button uk-button-primary uk-button-large">$itemNames.getItemName($price.itemId)
+                        - $price.itemCount шт.</a><br><br>
+                #end
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#feed").slimscroll({
+        height: 'auto',
+        size: '5px',
+        alwaysVisible: true,
+        railVisible: true
+    });
+
+    var controller = '/wheel/getItem';
+
+    $('#prize-block').jScrollPane({
+        verticalDragMinHeight: 50,
+        verticalDragMaxHeight: 200,
+        horizontalDragMinWidth: 50,
+        horizontalDragMaxWidth: 200
+    });
+    //    $("html, body").animate({scrollTop: 120}, 200);
+    function ShowWheelBtn() {
+        if ($('#char_name').val() != 'Select character' && $('#char_name').val() != 'У вас нет персонажей') {
+            $('.wheel-btn').show();
+        } else {
+            $('.wheel-btn').hide();
+        }
+    }
+    function WheelStart() {
+        {
+//            $('.start-popup').hide();
+            $('.wheel-popup').fadeOut(800);
+            $('.wheel-text').fadeIn(200);
+        }
+    }
+    function ContinueGame() {
+//        $('.start-popup').hide();
+        $('.wheel-popup').fadeOut(500);
+    }
+    function spin() {
+        $('.wheel-gear').removeClass('gospin3');
+        setTimeout(function () {
+            $('.wheel-gear').addClass('gospin');
+            $('.wheel-buttonoff').show();
+            setTimeout(function () {
+
+                $.get(controller,
+                        function (data) {
+                            if (data == "") {
+                                window.location = "/wheel";
+                                return;
+                            }
+
+                            $('#wheelTicketCount').html(parseInt($('#wheelTicketCount').html()) - 1);
+
+                            $('.wheel-gear').removeClass('gospin');
+                            setTimeout(function () {
+                                $('.wheel-gear').addClass('gospin2');
+                            }, 50);
+                            setTimeout(function () {
+                                $('.gear-item1').find('.wheel-prize').html('<img src="/image/wheel/' + data.id + '" alt="">');
+                                $('.gear-item1').find('.wheel-prize-name').text(data.itemName + ' x' + data.itemCount);
+
+                                if ($('.gear-item1').find('.wheel-prize-name').text() == $('.gear-item2').find('.wheel-prize-name').text()) {
+                                    var tempName = $('.gear-item2').find('.wheel-prize-name').text();
+                                    var tempImg = $('.gear-item2').find('.wheel-prize').html();
+                                    $('.gear-item2').find('.wheel-prize-name').text($('.gear-item7').find('.wheel-prize-name').text());
+                                    $('.gear-item2').find('.wheel-prize').html($('.gear-item7').find('.wheel-prize').html());
+                                    $('.gear-item7').find('.wheel-prize-name').text(tempName);
+                                    $('.gear-item7').find('.wheel-prize').html(tempImg);
+                                }
+                            }, 1000);
+                            setTimeout(function () {
+                                $('.wheel-gear').removeClass('gospin2');
+                                $('.wheel-glow-effect').fadeIn(100).delay(50).fadeOut(100).delay(50).fadeIn(100).delay(50).fadeOut(100).delay(50).fadeIn(100).delay(50).fadeOut(100);
+                                setTimeout(function () {
+                                    $('.wheel-buttonoff').hide();
+                                    $('.win-item-name').text(data.itemName + ' x' + data.itemCount);
+                                    $('.wheel-popup').show();
+                                    $('.win-popup').fadeIn(500);
+                                    $('.win-item-img').html('<img src="/image/wheel/' + data.id + '" alt="">');
+                                    ReverseItems();
+                                }, 1000);
+                            }, 4000);
+                        });
+            }, 5000);
+        }, 100);
+    }
+
+    $(function () {
+        readyLoadImg = [false, false, false, false];
+        initProcess();
+        function initProcess() {
+            $("<img />").hide()
+                    .load(function () {
+                        readyLoadImg[0] = true;
+                        $(this).remove();
+                    })
+                    .attr("src", function () {
+                        var imgUrl = $(".wheel-gear").css("background-image");
+                        return imgUrl.substring(4, imgUrl.length - 1).replace(/\"/g, "").replace(/\'/g, "");
+                    });
+            $("<img />").hide()
+                    .load(function () {
+                        readyLoadImg[1] = true;
+                        $(this).remove();
+                    })
+                    .attr("src", function () {
+                        var imgUrl = $(".wheel-main").css("background-image");
+                        return imgUrl.substring(4, imgUrl.length - 1).replace(/\"/g, "").replace(/\'/g, "");
+                    });
+            $("<img />").hide()
+                    .load(function () {
+                        readyLoadImg[2] = true;
+                        $(this).remove();
+                    })
+                    .attr("src", function () {
+                        var imgUrl = $(".wheel-bg").css("background-image");
+                        return imgUrl.substring(4, imgUrl.length - 1).replace(/\"/g, "").replace(/\'/g, "");
+                    });
+            $("<img />").hide()
+                    .load(function () {
+                        readyLoadImg[3] = true;
+                        $(this).remove();
+                    })
+                    .attr("src", function () {
+                        var imgUrl = $(".wheel-button").css("background-image");
+                        return imgUrl.substring(4, imgUrl.length - 1).replace(/\"/g, "").replace(/\'/g, "");
+                    });
+            triggerIntro();
+        }
+
+        function triggerIntro() {
+            setTimeout(function () {
+                var cs = "";
+                for (var i = 0, l = readyLoadImg.length; i < l; i++) {
+                    cs += readyLoadImg[i] + ",";
+                }
+                if (cs == "true,true,true,true,") {
+                    aniPlayIntro();
+                } else {
+                    triggerIntro();
+                }
+            }, 500);
+        }
+
+        function aniPlayIntro() {
+            $('.wheel-load').fadeOut(500);
+        }
+    });
+
+    function ReverseItems() {
+        var i = 2;
+        var tempName = '';
+        var tempImg = '';
+        var num = 1;
+        while (i <= 12) {
+            num = Math.floor(Math.random() * 10) + 2;
+            tempName = $('.gear-item' + i).find('.wheel-prize-name').text();
+            tempImg = $('.gear-item' + i).find('.wheel-prize').html();
+            $('.gear-item' + i).find('.wheel-prize-name').text($('.gear-item' + num).find('.wheel-prize-name').text());
+            $('.gear-item' + i).find('.wheel-prize').html($('.gear-item' + num).find('.wheel-prize').html());
+            $('.gear-item' + num).find('.wheel-prize-name').text(tempName);
+            $('.gear-item' + num).find('.wheel-prize').html(tempImg);
+            i++;
+        }
+    }
+</script>

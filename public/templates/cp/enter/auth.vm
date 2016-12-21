@@ -1,0 +1,44 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+
+<div class="uk-vertical-align-middle" style="width: 500px;">
+    <form class="uk-panel uk-panel-box uk-form" action="#springUrl("/enter/auth")" method="POST">
+        <h2>Авторизация</h2>
+
+        <div class="uk-form-row">
+            #springBind("mAccount.username")
+            #springFormInput("mAccount.username" 'class="uk-width-1-1 uk-form-large" placeholder="E-mail"')
+            #foreach($e in $status.errorMessages)
+                <div class="uk-alert uk-alert-danger">
+                    $e
+                </div>
+            #end
+        </div>
+
+        <div class="uk-form-row">
+            #springBind("mAccount.password")
+            <!--По-другому лейблу перевода не получилось вклеить-->
+            #set( $attributes ='class="uk-width-1-1 uk-form-large" placeholder="Пароль" autocomplete="off"' )
+            #springFormPasswordInput("mAccount.password" $attributes)
+            #foreach($e in $status.errorMessages)
+                <div class="uk-alert uk-alert-danger">
+                    $e
+                </div>
+            #end
+        </div>
+
+        <div class="uk-form-row" align="center">
+            <div class="field" align="center">
+                <div class="g-recaptcha" data-sitekey="$recaptchaSiteKey"></div>
+            </div>
+            #if($!recaptchaError)
+                <div class="uk-alert uk-alert-danger">
+                    $recaptchaError
+                </div>
+            #end
+        </div>
+
+        <div class="uk-form-row">
+            <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">Отправить</button>
+        </div>
+    </form>
+</div>

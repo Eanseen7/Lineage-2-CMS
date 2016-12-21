@@ -1,0 +1,17 @@
+<div class="uk-vertical-align-middle" style="width: 500px;">
+    <form class="uk-panel uk-panel-box uk-form" action="#springUrl("/enter/change")" method="POST">
+        <h2>Сменить пароль</h2>
+        <div class="uk-form-row">
+            <input class="uk-width-1-1 uk-form-large" type="password" placeholder="Пароль" name="password"/>
+        </div>
+        <div class="uk-form-row">
+            <input class="uk-width-1-1 uk-form-large" type="password" placeholder="Повторите пароль" name="repeatPassword"/>
+        </div>
+        <div class="uk-form-row">
+            <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">Отправить</button>
+        </div>
+		#if($!error)
+            <div class="uk-alert uk-alert-danger"><a href="/enter/change" class="uk-alert-close uk-close"></a>$error</div>
+		#end
+    </form>
+</div>

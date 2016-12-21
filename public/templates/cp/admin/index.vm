@@ -1,0 +1,7 @@
+<div class="uk-grid">
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+            <a href="/admin/restart" class="uk-button uk-button-success">Рестарт</a>
+        </div>
+    </div>
+</div>

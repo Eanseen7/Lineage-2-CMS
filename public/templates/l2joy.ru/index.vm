@@ -1,0 +1,18 @@
+#foreach($info in $infos)
+<div id="news" style="margin-bottom: -40px;">
+    <div class="nframe"><img src="/image/info/$info.getId()" alt="" class="nimg"/></div>
+
+    <div class="inner-ncontent">
+        <div class="ntitle">$info.getTitle()</div>
+        <div class="ncontent">$info.getContent()</div>
+
+        <div class="ninfo">
+            <div class="inner-ninfo">
+                <div class="ndate"><img src="$template/images/news/clock.png">$info.getDateS()</div>
+                <div class="nauthor">опубликовал: <span>Admin</span></div>
+                <div class="nlink">$info.link</div>
+            </div>
+        </div>
+    </div>
+</div>
+#end

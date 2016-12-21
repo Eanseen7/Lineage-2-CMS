@@ -1,0 +1,12 @@
+#parse("cp/header.vm")
+#parse("cp/menu.vm")
+#if($!menu2)
+	#parse("$!menu2")
+#end
+#if($!menu3)
+	#parse("$!menu3")
+#end
+#if($!page)
+	#parse("$!page")
+#end
+#parse("cp/footer.vm")

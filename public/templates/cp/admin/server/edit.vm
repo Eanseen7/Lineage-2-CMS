@@ -1,0 +1,123 @@
+<div class="uk-grid">
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+            <form class="uk-form" action="#springUrl("/admin/server/edit")" method="POST">
+				#springFormHiddenInput("server.id")
+
+                <div>
+                    Тип
+                </div>
+                <div class="uk-form-row">
+					#springFormSingleSelect("server.type" $types 'onchange=setType();')
+                </div>
+                <br>
+
+                <div id="loginIdText">
+                    Логин сервер
+                </div>
+                <div class="uk-form-row" id="loginIdField">
+					#springFormSingleSelect("server.loginId" $loginServers)
+                </div>
+				<br>
+
+                <div>
+                    Имя
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("server.name" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    IP
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("server.ip" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Порт
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("server.port" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Login
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("server.xmlRpcL" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div>
+                    Password
+                </div>
+                <div class="uk-form-row">
+					#springFormInput("server.xmlRpcP" 'class="uk-width-1-1 uk-form-large" placeholder=""')
+                </div>
+                <br>
+
+                <div class="uk-form-row">
+                    Активирован: #springFormCheckbox("server.enable")
+                </div>
+                <br>
+
+                <div class="uk-form-row">
+                    <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">Сохранить
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="uk-width-5-10">
+        <div class="uk-panel-box">
+			#foreach($loginServer in $servers)
+				#if($loginServer.type == "LOGIN")
+                    <i class="uk-icon-cog"></i>
+                    <a href="/admin/server/remove/$loginServer.id" class="uk-button uk-button-danger">Удалить</a>
+                    <a href="/admin/server/edit/$loginServer.id" class="uk-button uk-button-success">Редактировать</a>
+					$loginServer.name
+                    <br>
+                    <br>
+					#foreach($gameServer in $servers)
+						#if($gameServer.type == "GAME" && $gameServer.loginId == $loginServer.id)
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="/admin/server/remove/$gameServer.id" class="uk-button uk-button-danger">Удалить</a>
+                            <a href="/admin/server/edit/$gameServer.id" class="uk-button uk-button-success">Редактировать</a>
+							$gameServer.name
+                            <br>
+                            <br>
+						#end
+					#end
+				#end
+			#end
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function onLoad() {
+        if (document.getElementById('type').value == "LOGIN") {
+            document.getElementById('loginIdText').style.display = "none";
+            document.getElementById('loginIdField').style.display = "none";
+        }
+    };
+
+    function setType() {
+        var value = document.getElementById('type').value;
+        switch (value) {
+            case "LOGIN":
+                document.getElementById('loginIdText').style.display = "none";
+                document.getElementById('loginIdField').style.display = "none";
+                break
+            case "GAME":
+                document.getElementById('loginIdText').style.display = "block";
+                document.getElementById('loginIdField').style.display = "block";
+                break;
+        }
+        return true;
+    }
+</script>

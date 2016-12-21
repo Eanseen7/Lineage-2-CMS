@@ -1,0 +1,381 @@
+				/*** RIP BY THANATOS.SU**/
+				
+#formation {
+  position: relative;
+  width: 620px;
+  background: #223033;
+  margin: 0 auto 0px;
+  display: block;
+  padding-bottom: 10px;
+}
+
+.frtitle {
+  position: relative;
+  width: 620px;
+  min-height: 38px;
+  background: #172025;
+  display: block;
+}
+
+.frtitle span {
+  position: relative;
+  width: 480px;
+  display: inline-block;
+  padding: 10px 0;
+  color: #e7e7de;
+  font-size: 18px;
+  text-shadow: 0 0 0 #e7e7de;
+}
+/**************************************************/
+/**************************************************/
+                /***формы блоков***/
+/**************************************************/
+/**************************************************/
+.formation-block {
+  position: relative;
+  width: 400px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+input {
+  width: 180px !important;
+  height: 30px !important;
+  position: relative;
+  display: block;
+  margin: 0 0 5px;
+  padding: 0 10px;
+  color: #e7e7de;
+  background: url(../images/formation/input.png);
+  border: none;
+  outline: none;
+}
+
+select {
+  width: 200px !important;
+  height: 30px !important;
+  position: relative;
+  display: block;
+  margin: 0 0 5px;
+  padding: 0 10px;
+  color: #e7e7de;
+  background: url(../images/formation/input.png);
+  border: none;
+  outline: none;
+}
+
+option {
+  background: #222222;
+  color: #e7e7de;
+  outline: none;
+  border: none;
+}
+
+label {
+    width: 105px;
+    position: relative;
+    float: left;
+    display: table;
+    text-align: right;
+    font-size: 12px;
+    margin-right: 10px;
+    line-height: 30px;
+}
+
+span.frcode {
+    position: absolute;
+    display: block;
+    right: 90px;
+    margin-top: 4px;
+    z-index: 1;
+}
+
+.regbutton {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  background: #008891;
+  width: 200px !important;
+  height: 30px !important;
+  padding: 0px;
+  color: #e7e7de;
+  text-align: center;
+  line-height: 30px;
+  left: 15px;
+}
+
+.regbutton:hover {
+  background: #004d52;
+  cursor: pointer;
+}
+
+.rebutton {
+  position: relative;
+  display: block;
+  margin: 5px auto 0;
+  color: #ff2c23;
+  width: 140px;
+  font-size: 12px;
+  text-align: center;
+  left: 15px;
+}
+
+.rebutton:hover {
+  text-decoration: underline;
+}
+
+#l2button {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  background: #008891;
+  width: 100px !important;
+  height: 25px !important;
+  padding: 0px;
+  color: #e7e7de;
+  text-align: center;
+  line-height: 25px;
+  left: 15px;
+}
+
+#l2button:hover {
+  background: #ff2c23;
+  cursor: pointer;
+}
+/**************************************************/
+/**************************************************/
+            /***формы блоков кабинета***/
+/**************************************************/
+/**************************************************/
+.formation-cabinet {
+  position: relative;
+  width: 620px;
+  display: block;
+  margin: 20px auto 0;
+}
+
+.frctitle {
+  position: relative;
+  width: 620px;
+  height: 25px;
+  line-height: 25px;
+  background: #172025;
+  color: #e7e7de;
+  font-weight: normal;
+  display: block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.formation-cabinet table {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 400px;
+}
+
+.formation-cabinet table tr,
+.formation-cabinet table tr td {
+    position: relative;
+    display: block;
+    width: 400px;
+}
+
+.formation-cabinet table tr td br,
+.frctable br {
+  display: none;
+}
+
+input.button.regbutton {
+    left: 0px;
+}
+
+.frctable {
+  position: relative;
+  width: 400px;
+  display: block;
+  margin: 0px auto 0;
+}
+
+.frctable label {
+  width: 140px;
+  text-align: right;
+  float: left;
+}
+
+input#chbutton.regbutton {
+    left: 50px;
+}
+
+a#swdelete {
+    position: absolute;
+    right: 20px;
+    margin-top: -29px;
+    color: #dac1a6;
+}
+
+div#alpha {
+    display: block;
+}
+
+div#alpha a {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  background: #222222;
+  color: #e7e7de;
+  display: inline-block;
+  margin-bottom: 5px;
+  -webkit-transition:all 0.2s ease; 
+  -o-transition:all 0.2s ease; 
+  -moz-transition:all 0.2s ease; 
+  transition:all 0.2s ease;
+}
+
+div#alpha a:hover {
+  -webkit-transform: scale(1.5);
+    -moz-transform: scale(1.5);
+    -o-transform: scale(1.5);
+    transform: scale(1.5);
+}
+/**************************************************/
+/**************************************************/
+          /***кнопки ссылки статистики***/
+/**************************************************/
+/**************************************************/
+#l2servers {
+  text-align:center;
+  position:relative; 
+  margin:0 auto; 
+  width:98%; 
+  display:block;
+}
+
+#l2servers a {
+  position:relative; 
+  display:inline-table; 
+  padding:4px 10px; 
+  outline:none; 
+  text-align:center; 
+  font-size:12px; 
+  color:#e7e7de; 
+  margin:5px 0; 
+  background:#152024; 
+  text-decoration:none;
+  transition:all 400ms ease;
+  -moz-transition:all 400ms ease;
+  -ms-transition:all 400ms ease;
+  -o-transition:all 400ms ease;
+  -webkit-transition:all 400ms ease; 
+}
+
+#l2servers a:hover {background:rgb(0, 0, 0); text-decoration:none;}
+#l2servers a.activ {background:rgb(0, 0, 0); text-decoration:none;}
+
+#l2menu {
+  text-align: center; 
+  position:relative; 
+  margin:0 auto; 
+  width:98%; 
+  display:block;
+}
+
+#l2menu a {
+  position:relative; 
+  display:inline-table; 
+  padding:4px 10px; 
+  outline:none; 
+  text-align:center; 
+  font-size:12px; 
+  color:#e7e7de; 
+  transition:all 400ms ease;
+  -moz-transition:all 400ms ease;
+  -ms-transition:all 400ms ease;
+  -o-transition:all 400ms ease;
+  -webkit-transition:all 400ms ease; 
+  margin:0px 0 5px; 
+  background:#152024;
+}
+
+#l2menu a:hover {
+  background:rgb(0, 0, 0); 
+  text-decoration:none;
+}
+/**************************************************/
+/**************************************************/
+#formation textarea {
+    background-color: #223033;
+    outline: none;
+    width: 90% !important;
+    max-width: 618px !important;
+    border: 1px solid #1c1c1c;
+    color: #fff;
+    padding: 5px;
+}
+
+table#swsupport2 hr {
+    border: none;
+    border-bottom: 1px solid #1c1c1c;
+    background: none;
+    padding-top: 5px;
+}
+
+table#swsupport2 tr th {
+  padding: 5px 0;
+}
+
+table#swsupport2 tr th b {
+  padding: 0 5px;
+}
+
+#formation fieldset {
+    border-color: #223033;
+}
+
+.robo-donate-next {
+  position: relative;
+  display: block;
+  margin: 0 auto;
+}
+
+div#formation form p input {
+    position: relative;
+    display: block;
+    margin: 0 auto;
+    left: -22px;
+    top: 4px;
+}
+
+div#formation form p input:hover {
+    cursor: pointer;
+}
+
+.frctable input[type="radio"] {
+    width: 15px !important;
+    height: 15px !important;
+    display: inline-block;
+}
+input.frcradio {
+    position: relative;
+    margin-top: 6px;
+    top: 3px;
+}
+
+#sexchar span {
+    position: relative;
+    display: block;
+    margin: 0 auto 5px;
+    width: 380px;
+    text-align: center;
+    font-size: 12px;
+    left: -17px;
+}
+
+div#charname span {
+    position: relative;
+    left: 122px;
+    margin: 0 0 5px;
+    display: block;
+}

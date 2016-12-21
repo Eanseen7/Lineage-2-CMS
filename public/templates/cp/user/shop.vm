@@ -1,0 +1,62 @@
+<div class="uk-grid">
+    <div class="uk-width-1-1">
+        <div class="uk-panel-box">
+            <strong>Рубли:</strong>
+            <strong class="uk-badge uk-badge-notification">$!itemService.getCount($!mAccount.id, 100000)</strong>&nbsp;&nbsp;&nbsp;
+            <strong>Голоса:</strong>
+            <strong class="uk-badge uk-badge-notification">$!itemService.getCount($!mAccount.id, 100001)</strong>&nbsp;&nbsp;&nbsp;
+        </div>
+    </div>
+</div>
+
+<div class="uk-grid">
+    <div class="uk-width-1-1" id="div">
+    </div>
+</div>
+
+<div class="uk-grid">
+	#set( $i = 0)
+	#foreach($price in $prices)
+        <div class="uk-width-1-3">
+            <div class="uk-panel-box">
+                <form class="uk-panel uk-panel-box uk-form" id="form$i">
+                    <input type="hidden" name="shopPriceId" value="$price.id"/>
+                    <div class="uk-form-row">
+                        <strong>$itemNames.getItemName($price.itemId)</strong>
+                    </div>
+                    <div class="uk-form-row">
+                        <strong>Цена:</strong> $itemNames.getItemName($price.priceItemId): $price.priceItemCount
+                    </div>
+                    <div class="uk-form-row">
+                        <input class="uk-form-large uk-width-1-1" type="number" placeholder="Кол-во" name="itemCount"
+                               min="1" max="5000"/>
+                    </div>
+                    <div class="uk-form-row">
+                        <button class="uk-button uk-button-primary uk-button-large uk-width-1-1"
+                                onclick="sendForm('#form$i');">Купить
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+		#set( $i = $i + 1 )
+	#end
+</div>
+
+<script>
+    function sendForm(form) {
+        $(form).submit(function (e) {
+            var url = "/shop/buy";
+            var data = $(this).serialize();
+            $.ajax({
+                url: url,
+                data: data,
+                type: "POST"
+            }).done(function (data) {
+                $('#div').html(data);
+                setTimeout("location.href = '/shop';", 3000);
+            });
+            return false;
+        });
+    }
+</script>

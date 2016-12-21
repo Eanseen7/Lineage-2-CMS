@@ -1,0 +1,179 @@
+<div class="uk-grid">
+    <div class="uk-width-4-10">
+        <div class="uk-panel-box">
+            <strong>ID:</strong>
+            <strong class="uk-badge uk-badge-notification">$!mAccount.id</strong>&nbsp;&nbsp;&nbsp;
+            <strong>Email:</strong>
+            <strong class="uk-badge uk-badge-notification">$!mAccount.username</strong>&nbsp;&nbsp;&nbsp;
+            <a href="/enter/change" class="uk-badge uk-badge-notification">Сменить пароль</a>
+        </div>
+    </div>
+    <div class="uk-width-6-10">
+        <div class="uk-panel-box">
+            <strong>Рубли:</strong>
+            <strong class="uk-badge uk-badge-notification">$!itemService.getCount($!mAccount.id, 100000)</strong>&nbsp;&nbsp;&nbsp;
+            <strong>Голоса:</strong>
+            <strong class="uk-badge uk-badge-notification">$!itemService.getCount($!mAccount.id, 100001)</strong>&nbsp;&nbsp;&nbsp;
+            <a href="/cp/item" class="uk-badge uk-badge-notification">Перевод предметов в игру</a>&nbsp;&nbsp;&nbsp;
+            <a href="/cp/itemlog" class="uk-badge uk-badge-notification">История</a>
+        </div>
+    </div>
+</div>
+
+<div class="uk-grid">
+    <div class="uk-width-4-10">
+        <div class="uk-panel-box">
+            <form class="uk-form" id="form">
+                <h2>Создайте игровой аккаунт</h2>
+                <div class="uk-form-row">
+                    <select name="serverId">
+						#foreach($server in $servers)
+                            <option value="$server.id">$server.name</option>
+						#end
+                    </select>
+                </div>
+                <div class="uk-form-row">
+                    <input class="uk-width-1-1 uk-form-large" type="text" placeholder="Логин" name="gl"/>
+                </div>
+                <div class="uk-form-row">
+                    <input class="uk-width-1-1 uk-form-large" type="text" placeholder="Пароль" name="gp"/>
+                </div>
+                <div class="uk-form-row">
+                    <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large" type="submit">
+                        Создать
+                    </button>
+                </div>
+            </form>
+            <div id="div1"></div>
+            <script type="text/javascript">
+                $('#form').submit(function () {
+                    var uri = '/XmlRpcLogin/reg';
+                    var data = $("#form").serialize();
+                    $.ajax({
+                        url: uri,
+                        data: data,
+                        type: "POST"
+                    })
+                            .done(function (data) {
+                                switch (data.type) {
+                                    case 'SUCCESS':
+                                        window.location = "/cp";
+                                        break;
+                                    case 'FAIL':
+                                        $('#div1').html('<div class="uk-alert uk-alert-danger"><a href="/cp" class="uk-alert-close uk-close"></a>' + data.message + '</div>');
+                                        break;
+                                }
+                            });
+                    return false;
+                });
+            </script>
+        </div>
+        <br>
+		#if($!voteMmotopEnable)
+            <div class="uk-panel-box">
+                <h4><strong>Голосование:</strong></h4>
+				#if($!mAccount.voteName)
+                    Для получения бонуса при голосовании указывайте вместо имени персонажа, идентификатор <strong
+                        class="uk-badge uk-badge-notification">$!mAccount.voteName</strong>
+                    <br><br>
+					#if($!mmotopId)
+                        <a href="http://la2.mmotop.ru/servers/$!mmotopId/votes/new" class="uk-button uk-button-success">Голосовать
+                            в
+                            MMOTOP</a>
+					#end
+				#else
+                    Для того чтобы голосовать за наш проект и получать бонусы, Вам необходимо создать идентификатор,
+                    который
+                    будете вводить при голосовании
+                    <br><br>
+                    <form class="uk-form" id="form2">
+                        <div class="uk-form-row">
+                            <input class="uk-width-1-1 uk-form-large" type="text" placeholder="Идентификатор"
+                                   name="voteName"/>
+                        </div>
+                        <div class="uk-form-row">
+                            <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large"
+                                    type="submit">
+                                Сохранить идентификатор
+                            </button>
+                        </div>
+                    </form>
+                    <div id="div2"></div>
+                    <script type="text/javascript">
+                        $('#form2').submit(function () {
+                            var uri = '/cp/setVoteName';
+                            var data = $("#form2").serialize();
+                            $.ajax({
+                                url: uri,
+                                data: data,
+                                type: "POST"
+                            })
+                                    .done(function (data) {
+                                        switch (data.type) {
+                                            case 'SUCCESS':
+                                                window.location = "/cp";
+                                                break;
+                                            case 'FAIL':
+                                                $('#div2').html('<div class="uk-alert uk-alert-danger"><a href="/cp" class="uk-alert-close uk-close"></a>' + data.message + '</div>');
+                                                break;
+                                        }
+                                    });
+                            return false;
+                        });
+                    </script>
+				#end
+            </div>
+            <br>
+		#end
+    </div>
+    <div class="uk-width-6-10">
+        <div class="uk-panel-box">
+            <form class="uk-form" id="form4">
+                <div class="uk-form-row">
+                    <input class="uk-width-1-1 uk-form-large" type="text" placeholder="Сумма"
+                           name="sum" id="sum"/>
+                </div>
+                <div class="uk-form-row">
+                    <button class="uk-width-1-1 uk-button uk-button-primary uk-button-large"
+                            type="submit">
+                        Пополнить баланс
+                    </button>
+                </div>
+            </form>
+            <script type="text/javascript">
+                $('#form4').submit(function () {
+                    var sum = document.getElementById('sum').value;
+                    var uri = '/pay/init/' + sum;
+
+                    $.ajax({
+                        url: uri,
+                        type: "GET"
+                    })
+                            .done(function (data) {
+                                switch (data.type) {
+                                    case 'SUCCESS':
+                                        window.location = data.message;
+                                        break;
+                                }
+                            });
+                    return false;
+                });
+            </script>
+        </div>
+        <br>
+        <div class="uk-panel-box">
+            <h2>Ваши игровые аккаунты</h2>
+			#foreach($server in $servers)
+                <i class="uk-icon-cog"></i> Сервер - $server.name<br><br>
+				#foreach($gAccount in $gAccountService.findByMAccountIdAndServerId($mAccount.id, $server.id))
+                    <button class="uk-button uk-button-success" type="button"
+                            style="width: 200px;">$gAccount.name</button>
+                    <a href="/cp/changeGAccountPassword/$server.id/$gAccount.name" class="uk-button uk-button-primary"
+                       type="button">Сменить пароль</a>
+                    <br>
+                    <br>
+				#end
+			#end
+        </div>
+    </div>
+</div>

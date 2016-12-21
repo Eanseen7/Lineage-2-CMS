@@ -1,0 +1,11 @@
+<div class="uk-grid">
+    <div class="uk-width-10-10">
+        <div class="uk-panel-box">
+            <a href="/admin" class="uk-button uk-button-success">Система</a>
+            <a href="/admin/info" class="uk-button uk-button-success">Новости</a>
+            <a href="/admin/server" class="uk-button uk-button-success">Сервера</a>
+            <a href="/admin/manager" class="uk-button uk-button-success">Менеджер</a>
+            <a href="/admin/wheel" class="uk-button uk-button-success">Колесо Удачи</a>
+        </div>
+    </div>
+</div>
