@@ -21,6 +21,10 @@ import javax.persistence.Table;
 	@Column(name = "server_id") private @Getter @Setter long serverId;
 	@Column(name = "name") private @Getter @Setter String name;
 
+	public GAccount()
+	{
+	}
+
 	public GAccount(long mAccountId, long serverId, String name)
 	{
 		this.mAccountId = mAccountId;
